@@ -1,7 +1,7 @@
 ﻿##Knight's tour
 ##Written by me in December 2011 as a school assignment
 
-##This implementation of knight's tour can either be real fast or slow. Testing shows that time taken can vary.
+##This implementation of knight's tour can either run fast or slow. Testing shows that execution time can be variable.
 ##Worst case scenario might be that it takes hours.
 ##The following times were achieved on a 2x3.1Ghz AMD processor with 2GB of RAM.Running 32-bit python 3.2.2.
 ##Times:
