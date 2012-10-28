@@ -7,7 +7,6 @@ import time
 #Self-explanatory constants
 START_TIME = time.time() 
 BOARD_SIZE = 5 
-DEBUG = False
 BOARD = [[0 for i in range(BOARD_SIZE)] for j in range(BOARD_SIZE)]
 
 #Print the board with pretty formatting
@@ -25,12 +24,6 @@ def pretty_print():
         print('')
         i=i-1
     print('')
-    
-#Dump the board without pretty formatting
-def dump_board():
-    print('')
-    for rows in BOARD:
-        print(rows)
 
 #Return a list of valid moves
 #Params: pos   - The current position of the knight piece [0=y,1=x]
@@ -76,19 +69,15 @@ def valid_moves(pos):
 #Params: number - The number of the current move
 #        to     - The square to move to [0=y,1=x]
 def move(number,to):
-    BOARD[to[0]][to[1]] = number
-    return_value = False
+    BOARD[to[0]][to[1]],return_value = number,False
+    
     for row in BOARD:
         if(0 not in row):
             return_value = True
         else:
             return_value = False
             break
-            
-    if(DEBUG):
-         print("Made move to {0}".format(to))
-         dump_board()
-   
+
     for moves in valid_moves(to):
         if(move(number+1,moves)):
             return_value = True
@@ -107,28 +96,16 @@ def move(number,to):
 #Perform the Knight's tour
 #Params: start - List containing the starting position [0=y,1=x]
 def tour(start):
-    BOARD[start[0]][start[1]] = 1
-    return_value = False
-    if(DEBUG):
-        print("Made move to {0}".format(start))
-        dump_board()
-        
+    BOARD[start[0]][start[1]],return_value = 1, False
     for moves in valid_moves(start):
          if(move(2,moves)):
              return_value = True
              break 
     return return_value
     
-#The main entry point for the program
-def main():
+if __name__ == '__main__':
     start_time = time.time()
     start = [0,0] #Edit at your leisure
     print("Solving a {0}x{0} board...".format(BOARD_SIZE))
     print("Starting from {0}...".format(start))
-    if DEBUG:
-        print("Generated board...")
-        dump_board()
-    
     tour(start)
-    
-main()
